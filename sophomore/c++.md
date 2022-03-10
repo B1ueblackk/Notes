@@ -181,8 +181,6 @@ b = b ^ a;
 a = a ^ b;
 ```
 
-
-
 ### 基本数据类型 Data type
 
 built-in data type : char/int/float/double
@@ -193,3 +191,35 @@ typedef double profit ;
 typedef int INT ;
 
 主要是为了解决移植问题。如有些平台int为16位，定义short位INT16
+
+### 语句
+
+* 表达式语句
+* IO语句
+  * cin/cout
+  * \>>、<< 可重载
+* 控制流语句
+  * 顺序，选择，重复
+
+**switch**
+
+switch(整形表达式){
+
+case 整型常量表达式:break; 
+
+}
+
+<font color="red">switch的关联问题</font>
+
+
+
+## 程序组织
+
+### scope 作用域
+
+* 程序级 code/data
+* 函数级 stack
+* 块级 stack
+* 文件级 static
+
+main函数中定义的变量在data最底部，是全声明周期
