@@ -34,5 +34,3 @@ why goofycoin still has the double-spending?
 goofycoin does't limit whether a block can be added to another. That is to say, if a block can only be added to a specific block, there will no double-spendings.
 
 Proof of Work
-
-1
