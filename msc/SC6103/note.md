@@ -89,3 +89,50 @@ Different with CDR, JOS has **no prior knowledge** of the serialized form. So th
 ![](./pics/2.png)
 
 class name + version number + h0 + fields(int, String, String) + values of variables + h1
+## Lec 2
+### Interprocess Communication
+middleware layers
+* RMI and RPC
+* request-reply protocol marshaling & external data representation
+* UDP & TCP
+
+Reliability
+* validity: the message reaches the destination(the message will eventually be delivered)
+* Integrity: the message received is identical, no message would be delivered twice or more
+
+### UDP
+* transmit without acknowledgements or retries
+* not reliable
+	* Integrity: checksums to detect and reject corrupt packets
+	* Validity: messages may be dropped
+* apply for the apps that requires quick response
+
+**how to build reliable request-reply protocols over UDP?**
+* Client uses a **timeout** when waiting for the reply from server. If client didn't get response within the time, it will resend the message.
+	* solve the problem that message may be lost, but cause new problem that some message will be executed more than once
+	* ![](./pics/3.png)
+	* for non-idempotent operations, the server should retrieve stored and then reply message, next time the same request come, just reply the message that in store.
+	* for idempotent operations, the server don't need to identify, just execute will be fine.
+judge whether the operations are idempotent?
+
+### TCP
+* reliable because it is connection-oriented
+	* Integrity: use checksums to detect and reject corrupt packets; use sequence numbers to detect and reject duplicate packets
+	* Validity: know what has been received and use timeouts to retransmit the lost packets
+* need acknowledgements retries
+* no need to worry the message size, large messages get segmented
+
+**reducing the overhead of TCP protocols**
+* earlier version of HTTP sets up a new TCP connection for each HTTP request
+* recent version of HTTP uses persistent connections -- single connection, multiple requests
+
+### Object Model
+A object-oriented program consists of a collection of interacting objects, they communicate by invoking methods, passing the objects as arguments and receiving results.
+A interface defines the signature of the methods that can be accessed from other modules
+
+### Distributed Object Model
+in client-server arch. for example, objects are managed by servers and their methods are exposed to the clients to invoke remotely.
+#### RMI
+remote method invocation -- between objects in different processes
+#### LMI
+local method invocation -- between objects in the same process
